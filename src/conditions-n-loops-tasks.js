@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number === Math.abs(number);
 }
 
 /**
@@ -38,8 +38,15 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = a;
+  if (b > max) {
+    max = b;
+  }
+  if (c > max) {
+    max = c;
+  }
+  return max;
 }
 
 /**
@@ -82,8 +89,17 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === b && a + b > c && c !== 0) {
+    return true;
+  }
+  if (a === c && a + c > b && b !== 0) {
+    return true;
+  }
+  if (b === c && b + c > a && a !== 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -100,8 +116,60 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const roman = num % 10;
+  let first;
+  let second;
+  const decimalDigit = Math.trunc(num / 10);
+  switch (decimalDigit) {
+    case 1:
+      first = 'X';
+      break;
+    case 2:
+      first = 'XX';
+      break;
+    case 3:
+      first = 'XXX';
+      break;
+    case 0:
+    default:
+      first = '';
+      break;
+  }
+  switch (roman) {
+    case 1:
+      second = 'I';
+      break;
+    case 2:
+      second = 'II';
+      break;
+    case 3:
+      second = 'III';
+      break;
+    case 4:
+      second = 'IV';
+      break;
+    case 5:
+      second = 'V';
+      break;
+    case 6:
+      second = 'VI';
+      break;
+    case 7:
+      second = 'VII';
+      break;
+    case 8:
+      second = 'VIII';
+      break;
+    case 9:
+      second = 'IX';
+      break;
+    case 0:
+    default:
+      second = '';
+      break;
+  }
+  return first + second;
 }
 
 /**
@@ -119,8 +187,58 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const string = [...numberStr];
+  let resultString = '';
+  let newword = '';
+  for (let i = 0; i < string.length; i += 1) {
+    switch (string[i]) {
+      case '1':
+        newword = 'one';
+        break;
+      case '2':
+        newword = 'two';
+        break;
+      case '3':
+        newword = 'three';
+        break;
+      case '4':
+        newword = 'four';
+        break;
+      case '5':
+        newword = 'five';
+        break;
+      case '6':
+        newword = 'six';
+        break;
+      case '7':
+        newword = 'seven';
+        break;
+      case '8':
+        newword = 'eight';
+        break;
+      case '9':
+        newword = 'nine';
+        break;
+      case '0':
+        newword = 'zero';
+        break;
+      case '-':
+        newword = 'minus';
+        break;
+      case '.':
+      case ',':
+        newword = 'point';
+        break;
+      default:
+        newword = '';
+    }
+    if (i !== 0) {
+      resultString += ` ${newword}`;
+    } else resultString += newword;
+  }
+
+  return resultString;
 }
 
 /**
@@ -135,8 +253,13 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] !== str[str.length - i - 1]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -153,8 +276,13 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +300,14 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const numToString = String(num);
+  for (let i = 0; i < numToString.length; i += 1) {
+    if (numToString[i] === String(digit)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -189,8 +323,23 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  if (arr.length < 3) {
+    return -1;
+  }
+  let sum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    sum += arr[i];
+  }
+  let sumLeft = 0;
+  let j = 0;
+  for (; j < arr.length; j += 1) {
+    sumLeft += arr[j];
+    if ((sum - arr[j]) / 2 === sumLeft - arr[j]) {
+      return j;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -220,7 +369,7 @@ function getSpiralMatrix(/* size */) {
 
 /**
  * Rotates a matrix by 90 degrees clockwise in place.
- * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
+ * Take int o account that the matrix size can be very large. Consider how you can optimize your solution.
  * Usage of String and Array class methods is not allowed in this task.
  *
  * @param {number[][]} matrix - The matrix to rotate.
@@ -233,8 +382,23 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const newmatrix = matrix;
+  const temp = [];
+  for (let i = 0; i < matrix[0].length; i += 1) {
+    temp[i] = [];
+    let k = 0;
+    for (let j = matrix.length - 1; j >= 0; j -= 1) {
+      temp[i][k] = matrix[j][i];
+      k += 1;
+    }
+  }
+  for (let i = 0; i < matrix[0].length; i += 1) {
+    for (let j = 0; j < matrix.length; j += 1) {
+      newmatrix[i][j] = temp[i][j];
+    }
+  }
+  return matrix;
 }
 
 /**
